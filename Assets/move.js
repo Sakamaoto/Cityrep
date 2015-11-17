@@ -1,16 +1,21 @@
 ﻿#pragma strict
+#pragma strict
 
 var heading:double = 0.0;
 var pitch:double = 0.0;
+var move:MonoScript;
 
 private var width:int = 640;
 private var height:int = 480;
 private var longitude:double;
 private var latitude:double;
+private var longitude0:double;
+private var latitude0:double;
+private var earth:double = 40000000;
 
 var locDone:boolean = false;
 
-function Start () {
+function Start(){
 	if(Application.platform == RuntimePlatform.Android){
 		StartCoroutine(GetLoc());
 //		var box: GameObject = tranform.parent.gemeObject; 
@@ -24,8 +29,13 @@ function Start () {
 		}
 		StartCoroutine(GetStreetViewImage(latitude, longitude, heading, pitch));
 	}else if(Application.platform == RuntimePlatform.WindowsEditor){
-		longitude = 140.739838;
-		latitude = 40.826568;
+		longitude0 = 140.739838;
+		latitude0 = 40.826568;
+		
+		longitude = longitude0+20*360/earth*Mathf.Cos(transform.rotation.y)/Mathf.Cos(latitude0*Mathf.PI/180);
+		latitude = latitude0+20*360/earth*Mathf.Sin(transform.rotation.y);
+		Debug.Log(longitude);//緯度
+		Debug.Log(latitude);//経度
 		StartCoroutine(GetStreetViewImage(latitude, longitude, heading, pitch));
 	}
 }
@@ -79,3 +89,5 @@ function GetStreetViewImage(latitude, longitude, heading, pitch) {
 		
 	GetComponent(Renderer).material.mainTexture = www.texture;
 }
+
+

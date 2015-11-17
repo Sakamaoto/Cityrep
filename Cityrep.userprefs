@@ -1,10 +1,16 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\StreetViewImageLoader.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\move.js">
     <Files>
-      <File FileName="Cityrep.sln" Line="1" Column="1" />
-      <File FileName="Assets\Picasa.js" Line="1" Column="1" />
-      <File FileName="Assets\StreetViewImageLoader.js" Line="26" Column="50" />
+      <File FileName="Assets\move.js" Line="15" Column="1" />
+      <File FileName="Assets\MiniMap.cs" Line="21" Column="14" />
+      <File FileName="Assets\Touch.js" Line="1" Column="1" />
+      <File FileName="Assets\MyCameraController.cs" Line="1" Column="1" />
+      <File FileName="Assets\CameraController.js" Line="34" Column="4" />
+      <File FileName="Assets\CameraBillboard.cs" Line="1" Column="1" />
+      <File FileName="Assets\Button.js" Line="4" Column="18" />
+      <File FileName="Assets\Button(1).js" Line="5" Column="15" />
+      <File FileName="Assets\CS.js" Line="5" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

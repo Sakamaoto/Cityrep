@@ -46,14 +46,14 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Button(1).js" />
      <Compile Include="Assets\Button.js" />
      <Compile Include="Assets\CS.js" />
      <Compile Include="Assets\CameraController.js" />
-     <Compile Include="Assets\Fixed_GUI_Layout.js" />
-     <Compile Include="Assets\Picasa.js" />
      <Compile Include="Assets\StreetViewImageLoader.js" />
      <Compile Include="Assets\Touch.js" />
      <Compile Include="Assets\WebCam.js" />
+     <Compile Include="Assets\move.js" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

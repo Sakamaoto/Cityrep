@@ -14,4 +14,5 @@ function Update () {
      obj1.gameObject.SetActive(true);
     obj2.gameObject.SetActive(true);
  
-}}
+ }
+}
