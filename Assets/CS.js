@@ -8,11 +8,16 @@ modeCamera = true;
 function Start () {
    obj1 = GameObject.Find("box");
    obj2 = GameObject.Find("Foto");
-   obj3 = GameObject.Find("Quad");
+   obj3 = GameObject.Find("BackgroundCamera");
    obj1.gameObject.SetActive(false);
 }
 
 function ButtonPush(){
+
+
+//	var bs: BoxScript = GameObject.Find("box").GetComponent("BoxScript");
+//	bs.moveLoc();
+	
 	if(modeCamera){
 		Debug.Log("Button Push !!");
 		obj1.gameObject.SetActive(true);

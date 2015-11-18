@@ -1,33 +1,43 @@
 ﻿#pragma strict
-
-var heading:double = 0.0;
-var pitch:double = 0.0;
-
-private var width:int = 640;
-private var height:int = 480;
-private var longitude:double;
-private var latitude:double;
-
+public var longitude:double;
+public var latitude:double;
 var locDone:boolean = false;
+
+private var earth:double = 40000000;
 
 function Start () {
 	if(Application.platform == RuntimePlatform.Android){
 		StartCoroutine(GetLoc());
-//		var box: GameObject = tranform.parent.gemeObject; 
-//		while(!box.GetComponent(GetLocation).locDone){
-//			yield WaitForSeconds (1.0);
-//		}
-//		StartCoroutine(GetStreetViewImage(box.GetComponent(GetLocation).latitude, box.GetComponent(GetLocation).longitude, heading, pitch));
+
 //      GPSで貼り付け
 		while(!locDone){
 			yield WaitForSeconds (1.0);
 		}
-		StartCoroutine(GetStreetViewImage(latitude, longitude, heading, pitch));
 	}else if(Application.platform == RuntimePlatform.WindowsEditor){
 		longitude = 140.739838;
 		latitude = 40.826568;
-		StartCoroutine(GetStreetViewImage(latitude, longitude, heading, pitch));
 	}
+}
+
+function moveLoc() {
+	longitude += 20*360/earth*Mathf.Sin(transform.rotation.y)/Mathf.Cos(latitude*Mathf.PI/180);
+	latitude += 20*360/earth*Mathf.Cos(transform.rotation.y);
+	
+	// Plane?のmoveスクリプトのupdatePlane()を呼び出す
+	var ms: move = gameObject.transform.FindChild("Planefront").gameObject.GetComponent("move");
+	ms.UpdatePlane();
+	 ms = gameObject.transform.FindChild("Planetop").gameObject.GetComponent("move");
+	ms.UpdatePlane();
+	 ms = gameObject.transform.FindChild("Planeright").gameObject.GetComponent("move");
+	ms.UpdatePlane();
+	 ms = gameObject.transform.FindChild("Planeleft").gameObject.GetComponent("move");
+	ms.UpdatePlane();
+	 ms = gameObject.transform.FindChild("Planeback").gameObject.GetComponent("move");
+	ms.UpdatePlane();
+	 ms = gameObject.transform.FindChild("Planebottom").gameObject.GetComponent("move");
+	ms.UpdatePlane();
+	
+//	gameObject.transform.FindChild("Planefront").gameObject.GetComponent("move").UpdatePlane();
 }
 
 function GetLoc(){
@@ -68,14 +78,7 @@ function GetLoc(){
     Input.location.Stop ();
 }
 
-function GetStreetViewImage(latitude, longitude, heading, pitch) {
-	// Boxオブジェクト
-	//transform.parent.GetComponent(Get).longitude;
-	
-	var url:String = "http://maps.googleapis.com/maps/api/streetview?" + "size=" + width + "x" + height + "&location=" + latitude + "," + longitude + "&heading=" + heading + "&pitch=" + pitch + "&fov=90&sensor=false";
-		
-	var www:WWW = new WWW(url);
-	yield www;
-		
-	GetComponent(Renderer).material.mainTexture = www.texture;
+
+function Update () {
+
 }
