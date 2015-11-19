@@ -2,13 +2,11 @@
 public var longitude:double;
 public var latitude:double;
 var locDone:boolean = false;
-
 private var earth:double = 40000000;
 
 function Start () {
 	if(Application.platform == RuntimePlatform.Android){
 		StartCoroutine(GetLoc());
-
 //      GPSで貼り付け
 		while(!locDone){
 			yield WaitForSeconds (1.0);
@@ -22,7 +20,9 @@ function Start () {
 function moveLoc() {
 	longitude += 20*360/earth*Mathf.Sin(transform.rotation.y)/Mathf.Cos(latitude*Mathf.PI/180);
 	latitude += 20*360/earth*Mathf.Cos(transform.rotation.y);
-	
+	Debug.Log(Mathf.Sin(transform.rotation.y));
+	Debug.Log(Mathf.Cos(latitude*Mathf.PI/180));
+	Debug.Log(Mathf.Cos(transform.rotation.y));
 	// Plane?のmoveスクリプトのupdatePlane()を呼び出す
 	var ms: move = gameObject.transform.FindChild("Planefront").gameObject.GetComponent("move");
 	ms.UpdatePlane();
@@ -66,6 +66,11 @@ function GetLoc(){
     // Access granted and location value could be retrieved
     else {
         print ("Location: " + Input.location.lastData.latitude + " " +
+               Input.location.lastData.longitude + " " +
+               Input.location.lastData.altitude + " " +
+               Input.location.lastData.horizontalAccuracy + " " +
+               Input.location.lastData.timestamp);
+               Debug.Log("Location: " + Input.location.lastData.latitude + " " +
                Input.location.lastData.longitude + " " +
                Input.location.lastData.altitude + " " +
                Input.location.lastData.horizontalAccuracy + " " +

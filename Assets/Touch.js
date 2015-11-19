@@ -1,5 +1,3 @@
-
-
 #pragma strict
 //var guiTexture.enabled = false;
 private var decoy:GameObject;

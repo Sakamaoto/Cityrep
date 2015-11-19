@@ -47,9 +47,9 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\BoxScript.js" />
-     <Compile Include="Assets\Button.js" />
-     <Compile Include="Assets\CS.js" />
+     <Compile Include="Assets\CameraChangeStreet.js" />
      <Compile Include="Assets\CameraController.js" />
+     <Compile Include="Assets\StreetViweImageChange.js" />
      <Compile Include="Assets\Touch.js" />
      <Compile Include="Assets\WebCam.js" />
      <Compile Include="Assets\move.js" />
