@@ -13,7 +13,8 @@ public class CameraBillboard : MonoBehaviour
 	void Awake()
 	{
 		// カメラが指定されてない場合はメインカメラを使用
-		if (m_Camera == null) m_Camera = Camera.main;
+		if (m_Camera == null)
+			m_Camera = Camera.main;
 	}
 	
 	void Update()

@@ -3,26 +3,29 @@ public var longitude:double;
 public var latitude:double;
 var locDone:boolean = false;
 private var earth:double = 40000000;
+public var mCamera:Camera; 
 
 function Start () {
 	if(Application.platform == RuntimePlatform.Android){
 		StartCoroutine(GetLoc());
+		mCamera = Camera.main;
 //      GPSで貼り付け
 		while(!locDone){
 			yield WaitForSeconds (1.0);
 		}
 	}else if(Application.platform == RuntimePlatform.WindowsEditor){
+		mCamera = Camera.main;
 		longitude = 140.739838;
 		latitude = 40.826568;
 	}
 }
 
 function moveLoc() {
-	longitude += 20*360/earth*Mathf.Sin(transform.rotation.y)/Mathf.Cos(latitude*Mathf.PI/180);
-	latitude += 20*360/earth*Mathf.Cos(transform.rotation.y);
-	Debug.Log(Mathf.Sin(transform.rotation.y));
+	longitude += 20*360/earth*Mathf.Sin(mCamera.transform.rotation.y)/Mathf.Cos(latitude*Mathf.PI/180);
+	latitude += 20*360/earth*Mathf.Cos(mCamera.transform.rotation.y);
+	Debug.Log(Mathf.Sin(mCamera.transform.rotation.y));
 	Debug.Log(Mathf.Cos(latitude*Mathf.PI/180));
-	Debug.Log(Mathf.Cos(transform.rotation.y));
+	Debug.Log(Mathf.Cos(mCamera.transform.rotation.y));
 	// Plane?のmoveスクリプトのupdatePlane()を呼び出す
 	var ms: move = gameObject.transform.FindChild("Planefront").gameObject.GetComponent("move");
 	ms.UpdatePlane();
@@ -70,11 +73,11 @@ function GetLoc(){
                Input.location.lastData.altitude + " " +
                Input.location.lastData.horizontalAccuracy + " " +
                Input.location.lastData.timestamp);
-               Debug.Log("Location: " + Input.location.lastData.latitude + " " +
-               Input.location.lastData.longitude + " " +
-               Input.location.lastData.altitude + " " +
-               Input.location.lastData.horizontalAccuracy + " " +
-               Input.location.lastData.timestamp);
+//        Debug.Log("Location: " + Input.location.lastData.latitude + " " +
+//               Input.location.lastData.longitude + " " +
+//               Input.location.lastData.altitude + " " +
+//               Input.location.lastData.horizontalAccuracy + " " +
+//               Input.location.lastData.timestamp);
         longitude = Input.location.lastData.longitude;
         latitude = Input.location.lastData.latitude;
         locDone = true;

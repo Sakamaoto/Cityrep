@@ -4,7 +4,7 @@ var pitch:double = 0.0;
 
 private var width:int = 640;
 private var height:int = 480;
-var locDone:boolean = false;
+
 
 function Start(){
 	var bs: BoxScript = this.transform.parent.GetComponent("BoxScript");
@@ -14,9 +14,9 @@ function Start(){
 
 function UpdatePlane () {
 	var bs: BoxScript = this.transform.parent.GetComponent("BoxScript");
-	Debug.Log(bs.latitude);
-	Debug.Log(bs.longitude);
-	StartCoroutine(GetStreetViewImage(bs.latitude, bs.longitude, heading, pitch));
+//	Debug.Log(bs.latitude);
+//	Debug.Log(bs.longitude);
+	GetStreetViewImage(bs.latitude, bs.longitude, heading, pitch);
 }
 
 function GetStreetViewImage(latitude, longitude, heading, pitch) {

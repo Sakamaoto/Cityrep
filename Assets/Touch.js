@@ -24,12 +24,12 @@ function Update () {
 			if (Physics.Raycast (ray0, hit0)) {
 				var obj0 = hit0.collider.gameObject;
 				Debug.Log(obj0.name);
-				if(obj0.name == "Foto0"){
+				if(obj0.name == "Photo0"){
 					GetComponent(GUITexture).texture = image;
 					texture.enabled = true;
 					decoy.gameObject.SetActive(true);
 				}
-				else if(obj0.name == "Foto1"){
+				else if(obj0.name == "Photo1"){
 					GetComponent(GUITexture).texture = image1;
 					texture.enabled = true;
 					decoy.gameObject.SetActive(true);
@@ -53,12 +53,12 @@ function Update () {
 		if (Physics.Raycast (ray, hit)) {
 			var obj = hit.collider.gameObject;
 			Debug.Log(obj.name);
-			if(obj.name == "Foto0"){
+			if(obj.name == "Photo0"){
 				GetComponent(GUITexture).texture = image;
 				texture.enabled = true;
 				decoy.gameObject.SetActive(true);
 			}
-			else if(obj.name == "Foto1"){
+			else if(obj.name == "Photo1"){
 				GetComponent(GUITexture).texture = image1;
 				texture.enabled = true;
 				decoy.gameObject.SetActive(true);
