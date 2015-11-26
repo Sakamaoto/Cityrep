@@ -5,6 +5,8 @@ var fps:int = 20;
 	
 	
 function Start () {
+	width = Screen.width;
+	height = Screen.height;
 	var webcamTexture: WebCamTexture = new WebCamTexture(width,height,fps);
 	var renderer: Renderer = GetComponent.<Renderer>();
 	renderer.material.mainTexture = webcamTexture;

@@ -49,6 +49,8 @@
      <Compile Include="Assets\BoxScript.js" />
      <Compile Include="Assets\CameraChangeStreet.js" />
      <Compile Include="Assets\CameraController.js" />
+     <Compile Include="Assets\GUIText.js" />
+     <Compile Include="Assets\PhotoPosition.js" />
      <Compile Include="Assets\StreetViweImageChange.js" />
      <Compile Include="Assets\Touch.js" />
      <Compile Include="Assets\WebCam.js" />

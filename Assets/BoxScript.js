@@ -21,11 +21,11 @@ function Start () {
 }
 
 function moveLoc() {
-	longitude += 20*360/earth*Mathf.Sin(mCamera.transform.rotation.y)/Mathf.Cos(latitude*Mathf.PI/180);
-	latitude += 20*360/earth*Mathf.Cos(mCamera.transform.rotation.y);
-	Debug.Log(Mathf.Sin(mCamera.transform.rotation.y));
-	Debug.Log(Mathf.Cos(latitude*Mathf.PI/180));
-	Debug.Log(Mathf.Cos(mCamera.transform.rotation.y));
+	longitude += 15*360/earth*Mathf.Sin(mCamera.transform.rotation.y)/Mathf.Cos(latitude*Mathf.PI/180);
+	latitude += 15*360/earth*Mathf.Cos(mCamera.transform.rotation.y);
+	//Debug.Log(Mathf.Sin(mCamera.transform.rotation.y));
+	//Debug.Log(Mathf.Cos(latitude*Mathf.PI/180));
+	//Debug.Log(Mathf.Cos(mCamera.transform.rotation.y));
 	// Plane?のmoveスクリプトのupdatePlane()を呼び出す
 	var ms: move = gameObject.transform.FindChild("Planefront").gameObject.GetComponent("move");
 	ms.UpdatePlane();

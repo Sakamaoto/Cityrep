@@ -1,4 +1,4 @@
-﻿#pragma strict
+#pragma strict
 private var Box:GameObject;
 private var Photo:GameObject;
 private var BackgroundCamera:GameObject;
@@ -14,5 +14,4 @@ function Start () {
 function ButtonPush(){
 	var bs: BoxScript = GameObject.Find("box").GetComponent("BoxScript");
 	bs.moveLoc();
-
 }

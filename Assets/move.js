@@ -23,7 +23,7 @@ function GetStreetViewImage(latitude, longitude, heading, pitch) {
 	// Boxオブジェクト
 	//transform.parent.GetComponent(Get).longitude;
 	
-	var url:String = "http://maps.googleapis.com/maps/api/streetview?" + "size=" + width + "x" + height + "&location=" + latitude + "," + longitude + "&heading=" + heading + "&pitch=" + pitch + "&fov=90&sensor=false";
+	var url:String = "http://maps.googleapis.com/maps/api/streetview?" + "size=" + width + "x" + height + "&location=" + latitude + "," + longitude + "&heading=" + heading + "&pitch=" + pitch + "&fov=90&sensor=false"+"&key=AIzaSyA66akeGMXD5BucA-tbk9b4p9uA1dGqG3E";
 	Debug.Log("http://maps.googleapis.com/maps/api/streetview?" + "size=" + width + "x" + height + "&location=" + latitude + "," + longitude + "&heading=" + heading + "&pitch=" + pitch + "&fov=90&sensor=false");
 	var www:WWW = new WWW(url);
 	yield www;
