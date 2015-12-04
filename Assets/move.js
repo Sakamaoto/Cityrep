@@ -3,7 +3,7 @@ var heading:double = 0.0;
 var pitch:double = 0.0;
 
 private var width:int = 640;
-private var height:int = 480;
+private var height:int = 640;
 
 
 function Start(){

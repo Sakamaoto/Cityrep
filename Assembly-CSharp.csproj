@@ -47,8 +47,11 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\CameraBillboard.cs" />
-     <Compile Include="Assets\MiniMap.cs" />
-     <Compile Include="Assets\MyCameraController.cs" />
+     <Compile Include="Assets\MapSample.cs" />
+     <Compile Include="Assets\Text\FileOpen.cs" />
+     <None Include="Assets\Text\layout.txt" />
+     <None Include="Assets\Text\FileReadTest.txt" />
+     <None Include="Assets\Text\List.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

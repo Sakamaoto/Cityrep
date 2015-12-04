@@ -3,10 +3,12 @@
 private var decoy:GameObject;
 var texture:GUITexture;
 
+
 var image:Texture;
 var image1:Texture;
 
 function Start(){
+
    texture.enabled = false;
    decoy = GameObject.Find("decoy");
    decoy.gameObject.SetActive(false);

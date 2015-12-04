@@ -21,8 +21,8 @@ function Start () {
 }
 
 function moveLoc() {
-	longitude += 15*360/earth*Mathf.Sin(mCamera.transform.rotation.y)/Mathf.Cos(latitude*Mathf.PI/180);
-	latitude += 15*360/earth*Mathf.Cos(mCamera.transform.rotation.y);
+	longitude += 5*360/earth*Mathf.Sin(mCamera.transform.rotation.y)/Mathf.Cos(latitude*Mathf.PI/180);
+	latitude += 5*360/earth*Mathf.Cos(mCamera.transform.rotation.y);
 	//Debug.Log(Mathf.Sin(mCamera.transform.rotation.y));
 	//Debug.Log(Mathf.Cos(latitude*Mathf.PI/180));
 	//Debug.Log(Mathf.Cos(mCamera.transform.rotation.y));
