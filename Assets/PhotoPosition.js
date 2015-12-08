@@ -7,28 +7,22 @@ private var ci:int = 4; //Contents information
 
 
 function Start () {
-  
-  Photolocation();
 	// 新町　アスパム通り 原点
 	var lat1:double = 40.826568 ;
 	var lng1:double = 140.739838 ;
-
 	// 菊屋デパート（現　さくら野）写真の位置
 	var lat2:double = 40.826744 ;
 	var lng2:double =  140.739128 ;
-//　経度緯度で距離を求める
-	var gd:double = geoDisTance(lat1,lng1,lat2,lng2,1);
-	Debug.Log(gd);		
+		Photolocation(lat1,lng1,lat2,lng2);
 }
 
 //写真の配置と生成
-function Photolocation(){
+function Photolocation(lat1:double, lng1:double, lat2:double, lng2:double){
 	readFile("");
-//	geoDisTance(lat1, lng1, lat2, lng2, 1) //lat1:原点 lng1:原点　lat2:写真の位置　lng2:写真の位置　１：精度？ 
 	for (var i = 0; i < photoNumber; i++) {
 		//planeを子として生成
 		var plane:GameObject = GameObject.CreatePrimitive(PrimitiveType.Plane);
-		plane.transform.position = new Vector3(3, 0, 3);
+		plane.transform.position = new geoDistance(lat1,lng1,lat2,lng2);
 		plane.transform.parent = this.transform;
 		plane.name = "Photo"+i;
 		plane.transform.localScale = new Vector3(0.5,0.5,0.5);
@@ -40,24 +34,63 @@ function Photolocation(){
 
 
 // 読み込み関数
-function readFile(inputStr:String):String {
-  var fi:FileInfo = new FileInfo(Application.dataPath +'/'+"Text"+'/'+outputFilename);
-  var sr:StreamReader = new StreamReader(fi.OpenRead());
-  while( ! sr.EndOfStream){
-	for (var i = 0; i < ci; i++) {
-	    inputStr += sr.ReadLine();//一行
-	    inputStr += SetDefaultTxt();//開業
-    }
-    photoNumber++;
-  }
-  sr.Close();
-  Debug.Log(photoNumber);
-  return inputStr;
+function readFile(inputStr:String){
+	var fi:FileInfo = new FileInfo(Application.dataPath +'/'+"Text"+'/'+outputFilename);
+	var sr:StreamReader = new StreamReader(fi.OpenRead());
+	var data = new Array();
+	while( ! sr.EndOfStream){
+		data = sr.ReadLine();
+		inputStr += sr.ReadLine();//一行
+		photoNumber++;
+	}
+	Debug.Log("たぶんここ");
+	for(var val in data){
+		Debug.Log(value);
+	}
+	var elements = inputStr.Split(","[0]);
+	for(var aString in elements){
+	}
+	sr.Close();
+	Debug.Log(photoNumber);
+	return inputStr;
 }
 function SetDefaultTxt():String{
-  return '\n\r';
+	return '\n';
 }
 
+
+
+
+//
+// 球面三角法による緯度・経度から距離の算出
+//
+function geoDistance(lat1:double, lng1:double, lat2:double, lng2:double) {
+	var distance:double;
+	//緯度・経度から距離の計算
+	if (((lat1 - lat2) * (lat1 - lat2) < 0.000000001) && ((lng1 - lng2) * (lng1 - lng2) < 0.000000001)) {
+   		distance = 0;
+ 	}
+	else {
+   		lat1 = lat1 * Mathf.PI / 180;
+   		lng1 = lng1 * Mathf.PI / 180;
+   		lat2 = lat2 * Mathf.PI / 180;
+   		lng2 = lng2 * Mathf.PI / 180;
+
+ 	  	var delta_sigma:double = lat1 - lat2;
+   		var delta_lambda:double = lng1 - lng2;
+   		var right_1st:double = Mathf.Sin(delta_sigma / 2) * Mathf.Sin(delta_sigma / 2);
+   		var right_2nd:double = Mathf.Cos(lat1) * Mathf.Cos(lat2) * Mathf.Sin(delta_lambda / 2) * Mathf.Sin(delta_lambda / 2);
+   		var left:double = right_1st + right_2nd;
+   		distance = Mathf.Asin(Mathf.Sqrt(left)) * 2 * 6370000;
+ 	}
+ 	//写真のPositionの計算
+ 	var A:double = lat2-lat1;
+ 	var B:double = (lng2-lng1)*Mathf.Cos((lat1+lat2)/2*Mathf.PI/180);
+ 	var theta:double = Mathf.Atan(A/B);
+ 	var x:double = distance*Mathf.Cos(theta);
+ 	var z:double = distance*Mathf.Sin(theta);
+ 	return Vector3(x, 0, z);
+}
 ////
 //// 測地線航海算法の公式
 ////
