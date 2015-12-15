@@ -1,8 +1,9 @@
 ﻿#pragma strict
-public var longitude:double;
-public var latitude:double;
+public var longitude:double =140.739838;
+public var latitude:double =40.826568;
 var locDone:boolean = false;
 private var earth:double = 40000000;
+private var mDistance:int = 15;
 public var mCamera:Camera; 
 
 function Start () {
@@ -21,11 +22,8 @@ function Start () {
 }
 
 function moveLoc() {
-	longitude += 5*360/earth*Mathf.Sin(mCamera.transform.rotation.y)/Mathf.Cos(latitude*Mathf.PI/180);
-	latitude += 5*360/earth*Mathf.Cos(mCamera.transform.rotation.y);
-	//Debug.Log(Mathf.Sin(mCamera.transform.rotation.y));
-	//Debug.Log(Mathf.Cos(latitude*Mathf.PI/180));
-	//Debug.Log(Mathf.Cos(mCamera.transform.rotation.y));
+	longitude += mDistance*360/earth*Mathf.Sin(mCamera.transform.rotation.y)/Mathf.Cos(latitude*Mathf.PI/180);
+	latitude += mDistance*360/earth*Mathf.Cos(mCamera.transform.rotation.y);
 	// Plane?のmoveスクリプトのupdatePlane()を呼び出す
 	var ms: move = gameObject.transform.FindChild("Planefront").gameObject.GetComponent("move");
 	ms.UpdatePlane();

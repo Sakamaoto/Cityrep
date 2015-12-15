@@ -31,5 +31,5 @@ function Update () {
 			transform.rotation = Quaternion.Euler(0, 0, 0);
 		}
 	}
-	Debug.Log(transform.rotation.y);
+//	Debug.Log(transform.rotation.y);
 }

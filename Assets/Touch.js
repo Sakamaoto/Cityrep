@@ -3,12 +3,7 @@
 private var decoy:GameObject;
 var texture:GUITexture;
 
-
-var image:Texture;
-var image1:Texture;
-
 function Start(){
-
    texture.enabled = false;
    decoy = GameObject.Find("decoy");
    decoy.gameObject.SetActive(false);
@@ -26,13 +21,10 @@ function Update () {
 			if (Physics.Raycast (ray0, hit0)) {
 				var obj0 = hit0.collider.gameObject;
 				Debug.Log(obj0.name);
-				if(obj0.name == "Photo0"){
-					GetComponent(GUITexture).texture = image;
-					texture.enabled = true;
-					decoy.gameObject.SetActive(true);
-				}
-				else if(obj0.name == "Photo1"){
-					GetComponent(GUITexture).texture = image1;
+				if(obj0.tag == "Photo"){
+					var st0:String = "Texture/"+obj0.name;
+					var p_texture0:Texture2D = Resources.Load(st0);
+					GetComponent(GUITexture).texture = p_texture0;
 					texture.enabled = true;
 					decoy.gameObject.SetActive(true);
 				}
@@ -55,13 +47,10 @@ function Update () {
 		if (Physics.Raycast (ray, hit)) {
 			var obj = hit.collider.gameObject;
 			Debug.Log(obj.name);
-			if(obj.name == "Photo0"){
-				GetComponent(GUITexture).texture = image;
-				texture.enabled = true;
-				decoy.gameObject.SetActive(true);
-			}
-			else if(obj.name == "Photo1"){
-				GetComponent(GUITexture).texture = image1;
+			if(obj.tag == "Photo"){
+				var st:String = "Texture/"+obj.name;
+				var p_texture:Texture2D = Resources.Load(st);
+				GetComponent(GUITexture).texture = p_texture;
 				texture.enabled = true;
 				decoy.gameObject.SetActive(true);
 			}

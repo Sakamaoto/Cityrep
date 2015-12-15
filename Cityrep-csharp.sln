@@ -1,23 +1,19 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
-Project("{D94181A8-A605-0416-88DA-976A543C42EF}") = "Cityrep", "Assembly-CSharp-vs.csproj", "{D220AC1A-AB77-455A-6369-B988917CB991}"
-EndProject
+
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D220AC1A-AB77-455A-6369-B988917CB991}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D220AC1A-AB77-455A-6369-B988917CB991}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D220AC1A-AB77-455A-6369-B988917CB991}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D220AC1A-AB77-455A-6369-B988917CB991}.Release|Any CPU.Build.0 = Release|Any CPU
+
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																																																																																																																																																																																																																																								GlobalSection(MonoDevelopProperties) = preSolution
+																																																																																																																																																																																																																																																																																											GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1

@@ -14,8 +14,6 @@ function Start(){
 
 function UpdatePlane () {
 	var bs: BoxScript = this.transform.parent.GetComponent("BoxScript");
-//	Debug.Log(bs.latitude);
-//	Debug.Log(bs.longitude);
 	GetStreetViewImage(bs.latitude, bs.longitude, heading, pitch);
 }
 
@@ -27,7 +25,6 @@ function GetStreetViewImage(latitude, longitude, heading, pitch) {
 	Debug.Log("http://maps.googleapis.com/maps/api/streetview?" + "size=" + width + "x" + height + "&location=" + latitude + "," + longitude + "&heading=" + heading + "&pitch=" + pitch + "&fov=90&sensor=false");
 	var www:WWW = new WWW(url);
 	yield www;
-		
 	GetComponent(Renderer).material.mainTexture = www.texture;
 }
 
