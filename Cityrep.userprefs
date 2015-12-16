@@ -1,16 +1,16 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\PhotoPosition.js">
     <Files>
-      <File FileName="Assets\Touch.js" Line="1" Column="15" />
-      <File FileName="Assets\BoxScript.js" Line="73" Column="51" />
-      <File FileName="Assets\PhotoPosition.js" Line="95" Column="44" />
-      <File FileName="Assets\move.js" Line="6" Column="30" />
-      <File FileName="Assets\CameraController.js" Line="2" Column="1" />
+      <File FileName="Assets\PhotoPosition.js" Line="76" Column="26" />
+      <File FileName="Assets\Touch.js" Line="3" Column="30" />
+      <File FileName="Assets\BoxScript.js" Line="3" Column="39" />
+      <File FileName="Assets\move.js" Line="4" Column="1" />
+      <File FileName="Assets\CameraController.js" Line="5" Column="2" />
       <File FileName="Assets\CameraChangeStreet.js" Line="17" Column="2" />
-      <File FileName="Assets\StreetViweImageChange.js" Line="21" Column="8" />
+      <File FileName="Assets\StreetViweImageChange.js" Line="26" Column="2" />
       <File FileName="Assets\CameraBillboard.js" Line="18" Column="1" />
-      <File FileName="Assets\Text\List.txt" Line="18" Column="1" />
+      <File FileName="Assets\Text\List.txt" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

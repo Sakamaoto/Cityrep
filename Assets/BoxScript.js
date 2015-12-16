@@ -1,4 +1,4 @@
-﻿#pragma strict
+#pragma strict
 public var longitude:double =140.739838;
 public var latitude:double =40.826568;
 var locDone:boolean = false;
@@ -71,11 +71,6 @@ function GetLoc(){
                Input.location.lastData.altitude + " " +
                Input.location.lastData.horizontalAccuracy + " " +
                Input.location.lastData.timestamp);
-//        Debug.Log("Location: " + Input.location.lastData.latitude + " " +
-//               Input.location.lastData.longitude + " " +
-//               Input.location.lastData.altitude + " " +
-//               Input.location.lastData.horizontalAccuracy + " " +
-//               Input.location.lastData.timestamp);
         longitude = Input.location.lastData.longitude;
         latitude = Input.location.lastData.latitude;
         locDone = true;

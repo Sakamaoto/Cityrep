@@ -15,8 +15,12 @@ function ButtonPush(){
 	var bs: BoxScript = GameObject.Find("box").GetComponent("BoxScript");
 	var lat:double = bs.latitude;
 	var lng:double = bs.longitude;
+	Debug.Log("原点");
+	Debug.Log(lat);
+	Debug.Log(lng);
 	bs.moveLoc();
 	var Photo:GameObject = GameObject.Find("Photo");
 	var pp:PhotoPosition = Photo.GetComponent("PhotoPosition");
-	Photo.transform.position = pp.geoDistance(lat,lng,bs.latitude, bs.longitude);
+	Debug.Log("ここ");
+	Photo.transform.position += pp.geoDistance(lat,lng,bs.latitude, bs.longitude);
 }
