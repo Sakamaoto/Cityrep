@@ -22,5 +22,5 @@ function ButtonPush(){
 	var Photo:GameObject = GameObject.Find("Photo");
 	var pp:PhotoPosition = Photo.GetComponent("PhotoPosition");
 	Debug.Log("ここ");
-	Photo.transform.position += pp.geoDistance(lat,lng,bs.latitude, bs.longitude);
+	Photo.transform.position -= pp.geoDistance(lat,lng,bs.latitude, bs.longitude);
 }
