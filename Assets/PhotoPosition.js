@@ -27,7 +27,15 @@ function Start () {
 
 // 読み込み関数
 function readFile(lat:double,lng:double){
-	var fi:FileInfo = new FileInfo(Application.dataPath +'/'+"Text"+'/'+outputFilename);
+	var fi:FileInfo;
+	if(Application.platform == RuntimePlatform.Android){
+		var path:String = "jar:file://" + Application.dataPath + "!/assets" + "/" + outputFilename;
+		var www:WWW = new WWW(path);
+		yield www;
+		fi = new FileInfo(www.text);
+	}else if(Application.platform == RuntimePlatform.WindowsEditor){
+		fi = new FileInfo(Application.dataPath + "/StreamingAssets/"+outputFilename);
+	}
 	var sr:StreamReader = new StreamReader(fi.OpenRead());
 	var lines = new Array();
 	var photodata = new Array();
@@ -51,7 +59,6 @@ function readFile(lat:double,lng:double){
 		Photolocation(na,la,ln,p_r,lat,lng,tx);
 	}
 	sr.Close();
-	return photodata;
 }
 function SetDefaultTxt():String{
 	return '\n';
@@ -68,12 +75,22 @@ function Photolocation(name:String, lat1:double, lng1:double, photo_r:double, la
 	plane.name = name;
 	plane.tag = "Photo";
 	plane.transform.localScale = new Vector3(0.8,0.8,0.8);
-	var st:String = "Texture/"+name;
-	var texture:Texture2D = Resources.Load(st);
+	
+	
 	plane.AddComponent(CameraBillboard);
 	plane.AddComponent(GUIText);
+	if(Application.platform == RuntimePlatform.Android){
+		var path:String = "jar:file://" + Application.dataPath + "!/assets" + "/Texture/" + name;
+		var www:WWW = new WWW(path);
+		yield www;
+		plane.GetComponent(Renderer).material.mainTexture = www.texture;
+	}else if(Application.platform == RuntimePlatform.WindowsEditor){
+		var st:String = "Texture/"+name;
+		var texture:Texture2D = Resources.Load(st);
+		plane.GetComponent(Renderer).material.mainTexture = texture;
+	}
 	plane.GetComponent(GUIText).text = text;
-	plane.GetComponent(Renderer).material.mainTexture = texture;
+	
 } 
 
 //

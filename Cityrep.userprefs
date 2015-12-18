@@ -2,13 +2,13 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\PhotoPosition.js">
     <Files>
+      <File FileName="Assets\PhotoPosition.js" Line="82" Column="54" />
       <File FileName="Assets\StreetViweImageChange.js" Line="1" Column="1" />
-      <File FileName="Assets\BoxScript.js" Line="1" Column="1" />
+      <File FileName="Assets\BoxScript.js" Line="10" Column="1" />
       <File FileName="Assets\CameraBillboard.js" Line="1" Column="1" />
       <File FileName="Assets\CameraChangeStreet.js" Line="1" Column="1" />
       <File FileName="Assets\CameraController.js" Line="1" Column="1" />
-      <File FileName="Assets\move.js" Line="1" Column="1" />
-      <File FileName="Assets\PhotoPosition.js" Line="12" Column="23" />
+      <File FileName="Assets\move.js" Line="29" Column="2" />
       <File FileName="Assets\Touch.js" Line="1" Column="1" />
       <File FileName="Assets\WebCam.js" Line="1" Column="1" />
     </Files>
