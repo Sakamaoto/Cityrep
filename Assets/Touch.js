@@ -48,7 +48,7 @@ function Update () {
 			var obj = hit.collider.gameObject;
 			Debug.Log(obj.name);
 			if(obj.tag == "Photo"){
-				var st:String = "Texture/"+obj.name;
+				var st:String = "Texture0/"+obj.name;
 				var p_texture:Texture2D = Resources.Load(st);
 				GetComponent(GUITexture).texture = p_texture;
 				texture.enabled = true;

@@ -12,11 +12,13 @@ function Awake(){
 	if (m_Camera == null)
 		m_Camera = Camera.main;
 }
+
 function Start () {
 
 }
 
 function PhotoMove(){
+
 }
 
 function Update () {

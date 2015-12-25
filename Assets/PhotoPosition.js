@@ -1,6 +1,6 @@
 ﻿#pragma strict
 import System.IO; //FileInfo, StreamWriter, StreamReader
-private var outputFilename:String = 'List.txt';//テキストファイル名
+private var inputFilename:String = 'List0.txt';//テキストファイル名
 private	var r:double  = 6378.137; // 赤道半径[km]
 private var photoNumber:int = 0; //写真の枚数
 private var ci:int = 5; //Contents information
@@ -19,45 +19,77 @@ function Awake(){
 	readFile(bs.latitude, bs.longitude);
 }
 
-
 function Start () {
-
 
 }
 
 // 読み込み関数
 function readFile(lat:double,lng:double){
-	var fi:FileInfo;
 	if(Application.platform == RuntimePlatform.Android){
-		var path:String = "jar:file://" + Application.dataPath + "!/assets" + "/" + outputFilename;
+		var path:String = "jar:file://" + Application.dataPath + "!/assets" + "/" + inputFilename;
 		var www:WWW = new WWW(path);
 		yield www;
-		fi = new FileInfo(www.text);
+		var txt:String = www.text;
+		print(txt);
+//		var lines0 = new Array();
+		var photodata0 = new Array();
+		//print("ZZZ4");
+		var th:String[] = txt.ToString().Split("\n"[0]);
+		photoNumber = th.length;
+		print("Start");
+		for(var i0 = 1;i0 < photoNumber;i0++){
+			for(var j0 = 0;j0 < ci;j0++){
+			print("ci:"+ci);
+				photodata0[j0] = th[i0].ToString().Split(","[0])[j0]; 
+			}
+			print("AAAAA");	
+			na = photodata0[0];
+			print("na:"+na);
+			la = double.Parse(photodata0[1]);
+			ln = double.Parse(photodata0[2]);
+			p_r = double.Parse(photodata0[3]);
+			tx = photodata0[4];
+			Photolocation(na,la,ln,p_r,lat,lng,tx);
+		}
+		
 	}else if(Application.platform == RuntimePlatform.WindowsEditor){
-		fi = new FileInfo(Application.dataPath + "/StreamingAssets/"+outputFilename);
+		var fi:FileInfo;
+		fi = new FileInfo(Application.dataPath + "/StreamingAssets/"+ inputFilename);
+			var sr:StreamReader = new StreamReader(fi.OpenRead());
+		var lines = new Array();
+		var photodata = new Array();
+		var p:String = sr.ReadLine();
+		while( ! sr.EndOfStream){
+			lines.Push(sr.ReadLine());
+			photoNumber++;
+		}
+		for(var i = 0;i < photoNumber;i++){
+			for(var j = 0;j < ci;j++){
+				photodata[j] = lines[i].ToString().Split(","[0])[j]; 	
+			}
+			na = photodata[0];
+			la = double.Parse(photodata[1]);
+			ln = double.Parse(photodata[2]);
+			p_r = double.Parse(photodata[3]);
+			tx = photodata[4];
+			Photolocation(na,la,ln,p_r,lat,lng,tx);
+		}
 	}
-	var sr:StreamReader = new StreamReader(fi.OpenRead());
-	var lines = new Array();
-	var photodata = new Array();
-	sr.ReadLine();
-	while( ! sr.EndOfStream){
-		lines.Push(sr.ReadLine());
-		photoNumber++;
-	}
+
 	//確認
 	Debug.Log("たぶんここ");
 	//lines[行].ToString().Split(","[0])[文]);
-	for(var i = 0;i < photoNumber;i++){
-		for(var j = 0;j < ci;j++){
-			photodata[j] = lines[i].ToString().Split(","[0])[j]; 	
-		}
-		na = photodata[0];
-		la = double.Parse(photodata[1]);
-		ln = double.Parse(photodata[2]);
-		p_r = double.Parse(photodata[3]);
-		tx = photodata[4];
-		Photolocation(na,la,ln,p_r,lat,lng,tx);
-	}
+//	for(var i = 0;i < photoNumber;i++){
+//		for(var j = 0;j < ci;j++){
+//			photodata[j] = lines[i].ToString().Split(","[0])[j]; 	
+//		}
+//		na = photodata[0];
+//		la = double.Parse(photodata[1]);
+//		ln = double.Parse(photodata[2]);
+//		p_r = double.Parse(photodata[3]);
+//		tx = photodata[4];
+//		Photolocation(na,la,ln,p_r,lat,lng,tx);
+//	}
 	sr.Close();
 }
 function SetDefaultTxt():String{
@@ -66,37 +98,47 @@ function SetDefaultTxt():String{
 
 //写真の配置と生成
 function Photolocation(name:String, lat1:double, lng1:double, photo_r:double, lat0:double, lng0:double, text:String){
+	
 	//planeを子として生成
 	var plane:GameObject = GameObject.CreatePrimitive(PrimitiveType.Plane);
+	yield plane;
 	//obj = GameObject.Find("Plane");
 	//var plane:GameObject = Instantiate (obj, geoDistance(lat0,lng0,lat1,lng1), Quaternion.identity);
+	print("CCCC");
+	print(lat0);
+	print(lng0);
+	print("DDDD");
 	plane.transform.position = new geoDistance(lat0,lng0,lat1,lng1);
 	plane.transform.parent = this.transform;
 	plane.name = name;
 	plane.tag = "Photo";
-	plane.transform.localScale = new Vector3(0.8,0.8,0.8);
-	
-	
+	plane.transform.localScale = new Vector3(3,3,3);
 	plane.AddComponent(CameraBillboard);
 	plane.AddComponent(GUIText);
 	if(Application.platform == RuntimePlatform.Android){
-		var path:String = "jar:file://" + Application.dataPath + "!/assets" + "/Texture/" + name;
+		print("EEEE");
+		print(name);
+		var path:String = "jar:file://" + Application.dataPath + "!/Assets" + "/Texture1/" + name+".jpg";
 		var www:WWW = new WWW(path);
 		yield www;
+		print ("118line");
 		plane.GetComponent(Renderer).material.mainTexture = www.texture;
+		print ("120line");
+
 	}else if(Application.platform == RuntimePlatform.WindowsEditor){
-		var st:String = "Texture/"+name;
+		var st:String = "Texture1/"+name;
 		var texture:Texture2D = Resources.Load(st);
 		plane.GetComponent(Renderer).material.mainTexture = texture;
 	}
 	plane.GetComponent(GUIText).text = text;
-	
+
 } 
 
 //
 // 球面三角法による緯度・経度から距離の算出
 //
 function geoDistance(lat1:double, lng1:double, lat2:double, lng2:double) {
+	print("ZZZZZ");
 	var distance:double;
 	//緯度・経度から距離の計算
 	if (((lat1 - lat2) * (lat1 - lat2) < 0.000000001) && ((lng1 - lng2) * (lng1 - lng2) < 0.000000001)) {
@@ -121,7 +163,11 @@ function geoDistance(lat1:double, lng1:double, lat2:double, lng2:double) {
  	var theta:double = Mathf.Atan(B/A);
  	var x:double = distance*Mathf.Sin(theta);
  	var z:double = distance*Mathf.Cos(theta);
- 	return Vector3(x, 0, z);
+ 	print(x);
+ 	print(z);
+ 	print("end");
+ 	return Vector3(100, 0, 100);
+ 	
 }
 
 

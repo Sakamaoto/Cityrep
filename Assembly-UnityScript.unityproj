@@ -55,6 +55,7 @@
      <Compile Include="Assets\Touch.js" />
      <Compile Include="Assets\WebCam.js" />
      <Compile Include="Assets\move.js" />
+     <None Include="Assets\StreamingAssets\List0.txt" />
      <None Include="Assets\StreamingAssets\List.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

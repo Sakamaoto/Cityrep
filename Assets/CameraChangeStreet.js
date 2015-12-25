@@ -13,15 +13,9 @@ function Start () {
    Button.SetActive(false);
    Box.gameObject.SetActive(false);
    BackgroundCamera = GameObject.Find("BackgroundCamera");
-
 }
 
 function ButtonPush(){
-
-
-//	var bs: BoxScript = GameObject.Find("box").GetComponent("BoxScript");
-//	bs.moveLoc();
-	
 	if(modeCamera){
 		Debug.Log("Button Push !!");
 		Box.gameObject.SetActive(true);

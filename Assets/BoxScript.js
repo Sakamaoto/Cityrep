@@ -12,10 +12,10 @@ function Start () {
 		latitude = 40.826568;
 //		StartCoroutine(GetLoc());
 //		mCamera = Camera.main;
-////      GPSで貼り付け
-//		while(!locDone){
-//			yield WaitForSeconds (1.0);
-//		}
+//      GPSで貼り付け
+		while(!locDone){
+			yield WaitForSeconds (1.0);
+		}
 	}else if(Application.platform == RuntimePlatform.WindowsEditor){
 		mCamera = Camera.main;
 		longitude = 140.739838;
