@@ -1,12 +1,15 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\PhotoPosition.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\bg.shader">
     <Files>
-      <File FileName="Assets\PhotoPosition.js" Line="142" Column="22" />
-      <File FileName="Assets\BoxScript.js" Line="69" Column="60" />
-      <File FileName="Assets\CameraBillboard.js" Line="9" Column="1" />
-      <File FileName="Assets\StreetViweImageChange.js" Line="5" Column="32" />
-      <File FileName="Assets\Touch.js" Line="1" Column="1" />
+      <File FileName="Assets\move.js" Line="15" Column="21" />
+      <File FileName="Assets\BoxScript.js" Line="17" Column="17" />
+      <File FileName="Assets\PhotoPosition.js" Line="186" Column="12" />
+      <File FileName="Assets\StreetViweImageChange.js" Line="21" Column="15" />
+      <File FileName="Assets\Touch.js" Line="25" Column="6" />
+      <File FileName="Assets\CameraChangeStreet.js" Line="1" Column="1" />
+      <File FileName="Assets\Background.shader" Line="2" Column="1" />
+      <File FileName="Assets\bg.shader" Line="27" Column="23" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -22,7 +22,7 @@ function Update () {
 				var obj0 = hit0.collider.gameObject;
 				Debug.Log(obj0.name);
 				if(obj0.tag == "Photo"){
-					var st0:String = "Texture/"+obj0.name;
+					var st0:String = "Texture1/"+obj0.name;
 					var p_texture0:Texture2D = Resources.Load(st0);
 					GetComponent(GUITexture).texture = p_texture0;
 					texture.enabled = true;
@@ -48,7 +48,7 @@ function Update () {
 			var obj = hit.collider.gameObject;
 			Debug.Log(obj.name);
 			if(obj.tag == "Photo"){
-				var st:String = "Texture0/"+obj.name;
+				var st:String = "Texture1/"+obj.name;
 				var p_texture:Texture2D = Resources.Load(st);
 				GetComponent(GUITexture).texture = p_texture;
 				texture.enabled = true;

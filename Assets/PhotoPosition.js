@@ -5,6 +5,13 @@ private	var r:double  = 6378.137; // 赤道半径[km]
 private var photoNumber:int = 0; //写真の枚数
 private var ci:int = 5; //Contents information
 public var obj:GameObject;
+//GetLoc()
+public var longitude:double;
+public var latitude:double;
+public var latitude0:double;
+public var longitude0:double;
+var locDone:boolean = false;
+
 //写真情報
 public var na:String;
 public var la:double;
@@ -12,15 +19,37 @@ public var ln:double;
 public var p_r:double;
 public var tx:String;
  
-function Awake(){
-	var box:GameObject = GameObject.Find("box");
-	var bs:BoxScript = box.GetComponent("BoxScript");
-	bs.Start();
-	readFile(bs.latitude, bs.longitude);
-}
+//function Awake(){
+//	print("Start");
+//	var box:GameObject = GameObject.Find("box");
+//	print("DDD");
+//	var bs:BoxScript = box.GetComponent("BoxScript");
+//	print("EEE");
+//	bs.Start();
+//	print("FFF");
+//	print(bs.latitude);
+//	print(bs.longitude);
+//	readFile(bs.latitude, bs.longitude);
+//}
 
 function Start () {
-
+	if(Application.platform == RuntimePlatform.Android){
+		//Updatelocation()で位置を取得
+		StartCoroutine(Updatelocation());
+		GetLoc();
+		readFile(latitude,longitude);
+//		latitude = 40.826568;
+//		longitude = 140.739838;
+//		readFile(latitude,longitude);
+	}else if(Application.platform == RuntimePlatform.WindowsEditor){
+		//BoxScriptから位置を取得
+		var box:GameObject = GameObject.Find("box");
+		var bs:BoxScript = box.GetComponent("BoxScript");
+		bs.Start();
+		print(bs.latitude);
+		print(bs.longitude);
+		readFile(bs.latitude, bs.longitude);
+	}
 }
 
 // 読み込み関数
@@ -30,21 +59,15 @@ function readFile(lat:double,lng:double){
 		var www:WWW = new WWW(path);
 		yield www;
 		var txt:String = www.text;
-		print(txt);
 //		var lines0 = new Array();
 		var photodata0 = new Array();
-		//print("ZZZ4");
 		var th:String[] = txt.ToString().Split("\n"[0]);
 		photoNumber = th.length;
-		print("Start");
 		for(var i0 = 1;i0 < photoNumber;i0++){
 			for(var j0 = 0;j0 < ci;j0++){
-			print("ci:"+ci);
 				photodata0[j0] = th[i0].ToString().Split(","[0])[j0]; 
 			}
-			print("AAAAA");	
 			na = photodata0[0];
-			print("na:"+na);
 			la = double.Parse(photodata0[1]);
 			ln = double.Parse(photodata0[2]);
 			p_r = double.Parse(photodata0[3]);
@@ -75,9 +98,9 @@ function readFile(lat:double,lng:double){
 			Photolocation(na,la,ln,p_r,lat,lng,tx);
 		}
 	}
+	longitude0 = lat;
+    latitude0 = lng;
 
-	//確認
-	Debug.Log("たぶんここ");
 	//lines[行].ToString().Split(","[0])[文]);
 //	for(var i = 0;i < photoNumber;i++){
 //		for(var j = 0;j < ci;j++){
@@ -101,13 +124,9 @@ function Photolocation(name:String, lat1:double, lng1:double, photo_r:double, la
 	
 	//planeを子として生成
 	var plane:GameObject = GameObject.CreatePrimitive(PrimitiveType.Plane);
-	yield plane;
+//	yield plane;
 	//obj = GameObject.Find("Plane");
 	//var plane:GameObject = Instantiate (obj, geoDistance(lat0,lng0,lat1,lng1), Quaternion.identity);
-	print("CCCC");
-	print(lat0);
-	print(lng0);
-	print("DDDD");
 	plane.transform.position = new geoDistance(lat0,lng0,lat1,lng1);
 	plane.transform.parent = this.transform;
 	plane.name = name;
@@ -116,15 +135,16 @@ function Photolocation(name:String, lat1:double, lng1:double, photo_r:double, la
 	plane.AddComponent(CameraBillboard);
 	plane.AddComponent(GUIText);
 	if(Application.platform == RuntimePlatform.Android){
-		print("EEEE");
-		print(name);
-		var path:String = "jar:file://" + Application.dataPath + "!/Assets" + "/Texture1/" + name+".jpg";
-		var www:WWW = new WWW(path);
-		yield www;
-		print ("118line");
-		plane.GetComponent(Renderer).material.mainTexture = www.texture;
-		print ("120line");
-
+//		print(name);
+//		var path:String = "jar:file://" + Application.dataPath + "!/assets/" + name+".jpg";
+//		var www:WWW = new WWW(path);
+//		yield www;
+//		print("AAA");
+//		plane.GetComponent(Renderer).material.mainTexture = www.texture;
+//		print("BBB");
+		var st0:String = "Texture1/"+name;
+		var p_texture0:Texture2D = Resources.Load(st0);
+		plane.GetComponent(Renderer).material.mainTexture = p_texture0;
 	}else if(Application.platform == RuntimePlatform.WindowsEditor){
 		var st:String = "Texture1/"+name;
 		var texture:Texture2D = Resources.Load(st);
@@ -138,7 +158,6 @@ function Photolocation(name:String, lat1:double, lng1:double, photo_r:double, la
 // 球面三角法による緯度・経度から距離の算出
 //
 function geoDistance(lat1:double, lng1:double, lat2:double, lng2:double) {
-	print("ZZZZZ");
 	var distance:double;
 	//緯度・経度から距離の計算
 	if (((lat1 - lat2) * (lat1 - lat2) < 0.000000001) && ((lng1 - lng2) * (lng1 - lng2) < 0.000000001)) {
@@ -165,12 +184,62 @@ function geoDistance(lat1:double, lng1:double, lat2:double, lng2:double) {
  	var z:double = distance*Mathf.Cos(theta);
  	print(x);
  	print(z);
- 	print("end");
- 	return Vector3(100, 0, 100);
+ 	return Vector3(x, 0, z);
  	
 }
 
+function GetLoc(){
+	// First, check if user has location service enabled
+    if (!Input.location.isEnabledByUser)
+        return;
+    // Start service before querying location
+    Input.location.Start ();
+    // Wait until service initializes
+    var maxWait : int = 120;
+    while (Input.location.status
+           == LocationServiceStatus.Initializing && maxWait > 0) {
+        yield WaitForSeconds (1);
+        maxWait--;
+    }
+    // Service didn't initialize in 20 seconds
+    if (maxWait < 1) {
+        print ("Timed out");
+        return;
+    }
+    // Connection has failed
+    if (Input.location.status == LocationServiceStatus.Failed) {
+        print ("Unable to determine device location");
+        return;
+    }
+    // Access granted and location value could be retrieved
+    else {
+        print ("Location: " + Input.location.lastData.latitude + " " +
+               Input.location.lastData.longitude + " " +
+               Input.location.lastData.altitude + " " +
+               Input.location.lastData.horizontalAccuracy + " " +
+               Input.location.lastData.timestamp);
+        longitude = Input.location.lastData.longitude;
+        latitude = Input.location.lastData.latitude;
+        locDone = true;
+    }
+    // Stop service if there is no need to query location updates continuously
+    Input.location.Stop ();
+}
+
+function Updatelocation(){
+	var Photo:GameObject = GameObject.Find("Photo");
+	while(true){
+		yield WaitForSeconds (60);
+		GetLoc();
+		while(!locDone){
+			yield WaitForSeconds (1.0);
+		}
+		Photo.transform.position -= geoDistance(latitude0,longitude0,latitude, longitude);
+		latitude0 = latitude;
+		longitude0 = longitude;
+	}
+}
 
 function Update () {
-
+	
 }

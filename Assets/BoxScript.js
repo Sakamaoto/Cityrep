@@ -6,12 +6,14 @@ private var earth:double = 40000000;
 private var mDistance:int = 15;
 public var mCamera:Camera; 
 
+
+
 function Start () {
 	if(Application.platform == RuntimePlatform.Android){
-		longitude = 140.739838;
-		latitude = 40.826568;
-//		StartCoroutine(GetLoc());
-//		mCamera = Camera.main;
+//		longitude = 140.739838;
+//		latitude = 40.826568;
+		StartCoroutine(GetLoc());
+		mCamera = Camera.main;
 //      GPSで貼り付け
 		while(!locDone){
 			yield WaitForSeconds (1.0);
@@ -39,7 +41,6 @@ function moveLoc() {
 	ms.UpdatePlane();
 	 ms = gameObject.transform.FindChild("Planebottom").gameObject.GetComponent("move");
 	ms.UpdatePlane();
-	
 //	gameObject.transform.FindChild("Planefront").gameObject.GetComponent("move").UpdatePlane();
 }
 

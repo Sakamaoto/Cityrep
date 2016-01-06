@@ -12,7 +12,7 @@ function Start(){
 	UpdatePlane();
 }
 
-function UpdatePlane () {
+function UpdatePlane() {
 	var bs: BoxScript = this.transform.parent.GetComponent("BoxScript");
 	GetStreetViewImage(bs.latitude, bs.longitude, heading, pitch);
 }
